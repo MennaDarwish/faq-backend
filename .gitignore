@@ -1,0 +1,9 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+
+*.sqlite3
+*.DS_Store
+FAQ_Backend/main/migrations/
+FAQ_Backend/media/
+*.pyc
