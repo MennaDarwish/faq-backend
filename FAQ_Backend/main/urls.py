@@ -10,6 +10,9 @@ urlpatterns = [
     url(r'^tags/$', views.TagList.as_view(), name="tag-list"),
     url(r'^tags/(?P<pk>[0-9]+)/$', views.TagDetail.as_view(),
         name="tag-detail"),
+    url(r'^answers/$', views.AnswerList.as_view(), name="answer-list"),
+    url(r'^answers/(?P<pk>[0-9]+)/$', views.AnswerDetail.as_view(),
+        name="answer-detail"),
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)
