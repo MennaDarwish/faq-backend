@@ -41,6 +41,10 @@ INSTALLED_APPS = [
     'main.apps.MainConfig'
 ]
 
+REST_FRAMEWORK = {
+    'PAGE_SIZE': 10
+}
+
 MIDDLEWARE_CLASSES = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
