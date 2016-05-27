@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from main.models import Question, Tag
+from main.models import Question, Tag, Answer
 
 
 class QuestionSerializer(serializers.ModelSerializer):
@@ -18,3 +18,9 @@ class TagSerializer(serializers.ModelSerializer):
     class Meta:
         model = Tag
         fields = ('name', 'question')
+
+
+class AnswerSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Answer
+        fields = ('question', 'answer_body', 'accepted')
