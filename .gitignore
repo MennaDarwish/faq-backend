@@ -7,3 +7,5 @@ __pycache__/
 FAQ_Backend/main/migrations/
 FAQ_Backend/media/
 *.pyc
+
+uploads/
