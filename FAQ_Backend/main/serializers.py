@@ -1,5 +1,7 @@
 from rest_framework import serializers
 from main.models import Question, Tag, Answer
+from drf_haystack.serializers import HaystackSerializer
+from main.search_indexes import QuestionIndex
 
 
 class QuestionSerializer(serializers.ModelSerializer):
@@ -24,3 +26,14 @@ class AnswerSerializer(serializers.ModelSerializer):
     class Meta:
         model = Answer
         fields = ('question', 'answer_body', 'accepted')
+
+
+class AutocompleteSerializer(HaystackSerializer):
+    class Meta:
+        index_classes = [QuestionIndex]
+        fields = ["id", "body", "title", "autocomplete"]
+        ignore_fields = ["autocomplete"]
+
+        field_aliases = {
+            "q": "autocomplete"
+        }
