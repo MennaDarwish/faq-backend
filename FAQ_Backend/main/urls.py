@@ -1,6 +1,13 @@
 from django.conf.urls import url
 from main import views
 from rest_framework.urlpatterns import format_suffix_patterns
+from rest_framework import routers
+
+
+router = routers.SimpleRouter()
+router.register("questions/search", views.AutocompleteSearchViewSet,
+                base_name="questions-search")
+
 
 urlpatterns = [
     url(r'^$', views.api_root),
@@ -14,5 +21,7 @@ urlpatterns = [
     url(r'^answers/(?P<pk>[0-9]+)/$', views.AnswerDetail.as_view(),
         name="answer-detail"),
 ]
+
+urlpatterns += router.urls
 
 urlpatterns = format_suffix_patterns(urlpatterns)
