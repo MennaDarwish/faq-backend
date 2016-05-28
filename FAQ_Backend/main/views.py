@@ -1,11 +1,13 @@
 from main.models import Question, Tag, Answer
 from rest_framework import generics
 from main.serializers import (QuestionSerializer,
-                              TagSerializer, AnswerSerializer)
+                              TagSerializer, AnswerSerializer,
+                              AutocompleteSerializer)
 from rest_framework.decorators import api_view
 from rest_framework.reverse import reverse
 from rest_framework.response import Response
-from rest_framework.pagination import PageNumberPagination
+from drf_haystack.viewsets import HaystackViewSet
+from drf_haystack.filters import HaystackAutocompleteFilter
 # from rest_framework import permissions
 # Create your views here.
 
@@ -49,3 +51,8 @@ class AnswerList(generics.ListCreateAPIView):
 class AnswerDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Answer.objects.all()
     serializer_class = AnswerSerializer
+
+class AutocompleteSearchViewSet(HaystackViewSet):
+    index_models = [Question]
+    serializer_class = AutocompleteSerializer
+    filter_backends = [HaystackAutocompleteFilter]
