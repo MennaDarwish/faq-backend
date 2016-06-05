@@ -8,6 +8,9 @@ from rest_framework.reverse import reverse
 from rest_framework.response import Response
 from drf_haystack.viewsets import HaystackViewSet
 from drf_haystack.filters import HaystackAutocompleteFilter
+from rest_framework.permissions import IsAuthenticated
+from rest_framework_jwt.authentication import JSONWebTokenAuthentication
+from rest_framework.views import APIView
 # from rest_framework import permissions
 # Create your views here.
 
@@ -52,7 +55,21 @@ class AnswerDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Answer.objects.all()
     serializer_class = AnswerSerializer
 
+
 class AutocompleteSearchViewSet(HaystackViewSet):
     index_models = [Question]
     serializer_class = AutocompleteSerializer
     filter_backends = [HaystackAutocompleteFilter]
+
+
+class RestrictedView(APIView):
+    permission_classes = (IsAuthenticated, )
+    authentication_classes = (JSONWebTokenAuthentication, )
+
+    def get(self, request, format=None):
+        data = {
+            'id': request.user.id,
+            'username': request.user.username,
+            'token': str(request.auth)
+        }
+        return Response(data)
