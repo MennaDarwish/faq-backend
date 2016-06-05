@@ -33,7 +33,6 @@ class AutocompleteSerializer(HaystackSerializer):
         index_classes = [QuestionIndex]
         fields = ["id", "body", "title", "autocomplete"]
         ignore_fields = ["autocomplete"]
-
         field_aliases = {
             "q": "autocomplete"
         }

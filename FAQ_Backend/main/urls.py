@@ -2,6 +2,7 @@ from django.conf.urls import url
 from main import views
 from rest_framework.urlpatterns import format_suffix_patterns
 from rest_framework import routers
+from rest_framework_jwt.views import obtain_jwt_token
 
 
 router = routers.SimpleRouter()
@@ -20,6 +21,8 @@ urlpatterns = [
     url(r'^answers/$', views.AnswerList.as_view(), name="answer-list"),
     url(r'^answers/(?P<pk>[0-9]+)/$', views.AnswerDetail.as_view(),
         name="answer-detail"),
+    url(r'^api-token-auth/', obtain_jwt_token),
+    url(r'^restricted/$', views.RestrictedView.as_view()),
 ]
 
 urlpatterns += router.urls
